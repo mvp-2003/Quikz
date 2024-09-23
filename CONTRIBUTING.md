@@ -86,11 +86,11 @@ Add appropriate labels (e.g., bug, enhancement, documentation).
 - test: Adding or fixing tests.
 - chore: Maintenance or project changes that do not impact the codebase.
 
-6. **Documentation**
-- Make sure to add documentation to help otehr fellow devs understand the codebase and your contribution.
+6. **Documentation**\
+Make sure to add documentation to help otehr fellow devs understand the codebase and your contribution.
 
-7. **Reporting Bugs**
-- If you find a bug, please open an issue using the Bug Report template (bug: ).
+7. **Reporting Bugs**\
+If you find a bug, please open an issue using the Bug Report template (bug: ).
 
 ## License
 By contributing to Qwikz, you agree that your contributions will be licensed under the GNU AFFERO GENERAL PUBLIC LICENSE.
