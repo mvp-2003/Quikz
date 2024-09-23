@@ -17,6 +17,7 @@ During live events, managing quizzes can often be chaotic, especially with time 
 
 ## Getting Started
 ### Prerequisites
+Please go through [CONTRIBUTING guideline](https://github.com/mvp-2003/Quikz/blob/main/CONTRIBUTING.md)\
 To get _Qwikz_ running locally, ensure you have the following installed:
 
 - Node.js (v22.x or higher)
