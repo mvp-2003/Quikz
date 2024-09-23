@@ -1,5 +1,5 @@
-# Qwikz
-_**Qwikz**_ is an open-source quiz platform designed for hosting quizzes efficiently, especially in live events where time is crucial. This platform aims to simplify the process of organizing and conducting quizzes, with key features such as authentication, verification, timed submissions, question randomization, auto-grading, custom scoring, detailed analytics, and multi-language support.
+# Quikz
+_**Quikz**_ is an open-source quiz platform designed for hosting quizzes efficiently, especially in live events where time is crucial. This platform aims to simplify the process of organizing and conducting quizzes, with key features such as authentication, verification, timed submissions, question randomization, auto-grading, custom scoring, detailed analytics, and multi-language support.
 
 ## Features
 - **Simple Quiz Creation**: Easily create and manage quizzes with an intuitive interface.
@@ -8,7 +8,7 @@ _**Qwikz**_ is an open-source quiz platform designed for hosting quizzes efficie
 - **Real-Time Leaderboard**: Track participant progress and display a live leaderboard during events.
 - **Multi-Device Support**: Responsive design ensures that Qwikz works seamlessly across desktops, tablets, and smartphones.
 
-## Why Qwikz?
+## Why Quikz?
 During live events, managing quizzes can often be chaotic, especially with time constraints. Qwikz was developed with these challenges in mind, providing:
 
 1. _Fast Setup_: Get your quiz up and running in minutes.
@@ -27,7 +27,7 @@ To get _Qwikz_ running locally, ensure you have the following installed:
 ### Installation
 1. Clone the repository:
 ```
-git clone https://github.com/your-username/qwikz.git
+git clone https://github.com/your-username/quikz.git
 cd qwikz
 ```
 
