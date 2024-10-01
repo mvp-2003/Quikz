@@ -39,9 +39,40 @@ cd qwikz
 -> Open your browser and go to http://localhost:3000 to see Qwikz in action.
 
 4. Usage:
-Create a new quiz by filling in quiz details such as title, description, and questions.
-Share the quiz link with participants.
-Track their progress and submissions in real-time.
-Hosting a Live Quiz
-Use the timer function to control submission deadlines.
-Monitor real-time results with the built-in leaderboard.
+- Create a new quiz by filling in quiz details such as title, description, and questions.
+- Share the quiz link with participants.
+- Track their progress and submissions in real-time.
+
+### Hosting a Live Quiz
+- Use the timer function to control submission deadlines.
+- Monitor real-time results with the built-in leaderboard.
+
+## Running with Docker
+
+Alternatively, you can run Quikz using Docker. Follow these steps:
+
+### Prerequisites
+Ensure you have Docker installed on your machine. You can download it from the official [Docker website](https://www.docker.com/get-started).
+
+### Steps to Run with Docker
+
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/your-username/quikz.git
+    cd qwikz
+    ```
+
+2. Build the Docker image:
+    ```bash
+    docker build -t quikz-app .
+    ```
+
+3. Run the Docker container:
+    ```bash
+    docker run -p 5500:5500 quikz-app
+    ```
+
+4. Open your browser and go to [http://localhost:5500](http://localhost:5500) to see Quikz in action.
+
+With Docker, you can quickly deploy Quikz without manually managing dependencies or configurations. It's an ideal solution if you're looking for a containerized, portable version of the app for different environments.
+
