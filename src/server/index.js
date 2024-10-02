@@ -1,14 +1,16 @@
 // Import Libraries
 const express = require('express');
-const cors = require('cors');
 const dotenv = require('dotenv');
+const cors = require('cors');
 
 // Import Modules
 const {connectDB, disconnectDB} = require('./db/connect');
+const userAuthRouter = require('./routes/userAuthRouters');
+
 
 // Configure Env Variables.
 dotenv.config();
-let port = process.env.PORT || 5500;
+const port = process.env.PORT || 5500;
 const mongoURI = process.env.MONGO_URI;
 
 const app = express();
@@ -20,9 +22,13 @@ app.get("/", (req, res)=>{
     res.send("Quikz: Hello World!");
 });
 
+// Router
+app.use("/user/auth", userAuthRouter);
+
 const start = async () => {
     try {
         // Check if required environment variables are set
+        
         if (!mongoURI) {
             console.error('MONGO_URI environment variable is not set.');
             process.exit(1);
