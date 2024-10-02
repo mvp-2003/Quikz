@@ -2,7 +2,7 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
-
+const {Router }=  require("express");
 // Import Modules
 const {connectDB, disconnectDB} = require('./db/connect');
 
@@ -11,14 +11,22 @@ dotenv.config();
 let port = process.env.PORT || 5500;
 const mongoURI = process.env.MONGO_URI;
 
+// console.log("MONGODB URL ",mongoURI);
 const app = express();
-
+const router = Router();
+const Userroute = require("./Routes/User");
+const AuthRoute = require("./Routes/Auth");
 app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res)=>{
     res.send("Quikz: Hello World!");
 });
+app.use(express.json()); // to parse application/json
+
+app.use('/api/users', Userroute);
+app.use('/api/auth',AuthRoute);
+
 
 const start = async () => {
     try {
