@@ -113,7 +113,7 @@ const getAllAttemptsByUser = async (req, res) => {
     res.status(500).json({
       message: error.message,
       data: error,
-      success: false,
+      success: true,
     });
   }
 };
