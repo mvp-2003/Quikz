@@ -2,31 +2,32 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const {Router }=  require("express");
-// Import Modules
-const {connectDB, disconnectDB} = require('./db/connect');
 
-// Configure Env Variables.
+// Import Database
+const { connectDB, disconnectDB } = require('./db/connect');
+
+// Configure Env Variables
 dotenv.config();
+
 let port = process.env.PORT || 5500;
 const mongoURI = process.env.MONGO_URI;
 
-// console.log("MONGODB URL ",mongoURI);
 const app = express();
-const router = Router();
-const Userroute = require("./Routes/User");
-const AuthRoute = require("./Routes/Auth");
+
+// Middleware for CORS and JSON Parsing
 app.use(cors());
 app.use(express.json());
 
-app.get("/", (req, res)=>{
+// Import Routes
+const routes = require('./routes');
+
+// Routing Setup
+app.use('/', routes);
+
+// Root Route
+app.get("/", (req, res) => {
     res.send("Quikz: Hello World!");
 });
-app.use(express.json()); // to parse application/json
-
-app.use('/api/users', Userroute);
-app.use('/api/auth',AuthRoute);
-
 
 const start = async () => {
     try {
@@ -39,7 +40,7 @@ const start = async () => {
         await connectDB(mongoURI);
         app.listen(port, () => {
             console.log(`Server is listening to port ${port} happily`);
-            console.log(`GO Live: http://localhost:${port}/`)
+            console.log(`GO Live: http://localhost:${port}/`);
         });
     } catch (error) {
         console.error('Error starting the server:', error);
@@ -47,16 +48,17 @@ const start = async () => {
     }
 };
 
+// Start the Server
 start();
 
-// ShutDown on SIGINT signal.
+// Shut Down on SIGINT signal
 process.on('SIGINT', () => {
     console.log('Shutting down gracefully');
 
     try {
         disconnectDB();
     } catch (err) {
-        console.log("Error disconnecting mongoDB", err);
+        console.error("Error disconnecting mongoDB", err);
     }
 
     process.exit(0);
