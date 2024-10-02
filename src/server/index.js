@@ -19,10 +19,10 @@ app.use(cors());
 app.use(express.json());
 
 // Import Routes
-const routes = require('./routes');
+//const routes = require('./routes');
 
 // Routing Setup
-app.use('/', routes);
+// app.use('/', routes);
 
 // Root Route
 app.get("/", (req, res) => {
