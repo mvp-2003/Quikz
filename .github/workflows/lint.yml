@@ -19,11 +19,17 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16'  
+          node-version: '21'  
 
       - name: Install dependencies
         run: npm install
         working-directory: ./src/server  
+
+      - name: Check Node.js version
+        run: node -v
+
+      - name: Check ESLint version
+        run: npx eslint -v
 
       - name: Run ESLint
         run: npm run lint:fix
