@@ -1,4 +1,4 @@
-const Feedback=require("../models/feedback")
+const Feedback=require('../models/feedback');
 const { StatusCodes } = require('http-status-codes');
 
 const submitFeedback=async(req,res)=>{
@@ -14,7 +14,7 @@ const submitFeedback=async(req,res)=>{
         if(rating===NaN)
             return res
                     .status(StatusCodes.BAD_REQUEST)
-                    .json({"message":"Invalid rating input"});
+                    .json({'message':'Invalid rating input'});
         
         //Creation of new entry in feedback schema
         const feedback=await Feedback.create({
@@ -28,20 +28,20 @@ const submitFeedback=async(req,res)=>{
         if(!feedback)
             return res
                     .status(StatusCodes.INTERNAL_SERVER_ERROR)
-                    .json({"message":"Internal server error while creating new feedback entry"});
+                    .json({'message':'Internal server error while creating new feedback entry'});
 
         return res
         .status(StatusCodes.CREATED)
         .json({
-            "success":true,
-            "message":"Feedback has been submitted"
+            'success':true,
+            'message':'Feedback has been submitted'
         });
     }
     catch(error){
-        console.log(`Error while submitting the feedback`, error);
+        console.log('Error while submitting the feedback', error);
         process.exit(1);
     }
-}
+};
 
 const retrieveFeedbackBasedOnQuizId=async (req,res)=>{
     try{
@@ -56,25 +56,25 @@ const retrieveFeedbackBasedOnQuizId=async (req,res)=>{
             return res
                     .status(StatusCodes.NO_CONTENT)
                     .json({
-                        "success":false,
-                        "message":"No feedbacks exists for the given quiz."
+                        'success':false,
+                        'message':'No feedbacks exists for the given quiz.'
                     });
         }
 
         return res
                 .status(StatusCodes.OK)
                 .json({
-                    "success":true,
-                    "message":"Feedback for a particular quiz",
-                    "data":feedbacks,
+                    'success':true,
+                    'message':'Feedback for a particular quiz',
+                    'data':feedbacks,
                 });
     }
     catch(error){
-        console.log(`Error while retrieving the feedback`, error);
+        console.log('Error while retrieving the feedback', error);
         process.exit(1);
     }
 
-}
+};
 
 const retrieveFeedbackBasedOnUserId=async(req,res)=>{
     try{
@@ -89,21 +89,21 @@ const retrieveFeedbackBasedOnUserId=async(req,res)=>{
         if(!feedbacks.length){
             return res
                     .status(StatusCodes.NO_CONTENT)
-                    .send("No Feedback exists that are given by the user.");
+                    .send('No Feedback exists that are given by the user.');
         }
 
         return res
                 .status(StatusCodes.OK)
                 .json({
-                    "success":true,
-                    "message":"Feeback given by the user",
-                    "data":feedbacks
+                    'success':true,
+                    'message':'Feeback given by the user',
+                    'data':feedbacks
                 });
     }
     catch(error){
-        console.log(`Error while retrieving the feedback`, error);
+        console.log('Error while retrieving the feedback', error);
         process.exit(1);
     }
-}
+};
 
 module.exports={submitFeedback,retrieveFeedbackBasedOnQuizId,retrieveFeedbackBasedOnUserId};

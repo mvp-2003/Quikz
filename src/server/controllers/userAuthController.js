@@ -12,9 +12,9 @@ const securePassword = async (password) => {
         let hashedPass = await bcrypt.hash(password, 10);
         return hashedPass;
     } catch (err) {
-        console.log(`Error Hashing password`, err);
+        console.log('Error Hashing password', err);
     }
-}
+};
 
 // registerUser
 const registerUser = async (req, res) => {
@@ -23,7 +23,7 @@ const registerUser = async (req, res) => {
 
         // Check for null entries.
         if (!name || !email || !password) {
-            return res.status(StatusCodes.BAD_REQUEST).send("All fields required");
+            return res.status(StatusCodes.BAD_REQUEST).send('All fields required');
         }
 
         // check if email already exists
@@ -48,7 +48,7 @@ const registerUser = async (req, res) => {
         return res.status(StatusCodes.CREATED).json({ user, accessToken });
 
     } catch (err) {
-        console.log("Error registering a new User", err);
+        console.log('Error registering a new User', err);
         process.exit(1);
     }
 };
@@ -59,13 +59,13 @@ const loginUser = async (req, res) => {
         const {email, password} = req.body;
 
         if (!email || !password) {
-            return res.status(StatusCodes.BAD_REQUEST).send("ALL Fields Required");
+            return res.status(StatusCodes.BAD_REQUEST).send('ALL Fields Required');
         }
 
         const oldUser = await User.findOne({email});
 
         if (!oldUser) {
-            res.status(StatusCodes.NO_CONTENT).send("Email Does not exist");
+            res.status(StatusCodes.NO_CONTENT).send('Email Does not exist');
         }
 
         const isPassCorrect = await bcrypt.compare(password, oldUser.password);
@@ -78,7 +78,7 @@ const loginUser = async (req, res) => {
         }
 
     } catch (err) {
-        console.log(`Error Logging in`, err);
+        console.log('Error Logging in', err);
         process.exit(1);
     }
 };
@@ -86,7 +86,7 @@ const loginUser = async (req, res) => {
 // emailVerification
 const emailVerification = async (req, res) => {
     // TO DO: USE SMTP service.
-    res.status(StatusCodes.OK).send("OK");
+    res.status(StatusCodes.OK).send('OK');
 };
 
 module.exports = { registerUser, loginUser, emailVerification };
