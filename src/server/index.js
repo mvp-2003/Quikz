@@ -6,7 +6,7 @@ const cors = require('cors');
 // Import Modules
 const {connectDB, disconnectDB} = require('./db/connect');
 const userAuthRouter = require('./routes/userAuthRouters');
-
+const feedbackRouter=require('./routes/feedbackRouter');
 
 // Configure Env Variables.
 dotenv.config();
@@ -17,6 +17,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({extended:false}));
 
 app.get("/", (req, res)=>{
     res.send("Quikz: Hello World!");
@@ -24,6 +25,7 @@ app.get("/", (req, res)=>{
 
 // Router
 app.use("/user/auth", userAuthRouter);
+app.use("/feedback",feedbackRouter);
 
 const start = async () => {
     try {
