@@ -21,7 +21,7 @@ userSchema.methods.generateAccessToken = function (secretKey) {
     try {
         const token = jwt.sign(
             {
-                role: "user",
+                role: 'user',
                 id: this._id
             },
             secretKey,
@@ -31,9 +31,9 @@ userSchema.methods.generateAccessToken = function (secretKey) {
         );
         return token;
     } catch (err) {
-        console.log(`Error creating JWT token`, err);
+        console.log('Error creating JWT token', err);
         process.exit(1);
     }
 };
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model('User', userSchema);

@@ -19,13 +19,13 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 
-app.get("/", (req, res)=>{
-    res.send("Quikz: Hello World!");
+app.get('/', (req, res)=>{
+    res.send('Quikz: Hello World!');
 });
 
 // Router
-app.use("/user/auth", userAuthRouter);
-app.use("/feedback",feedbackRouter);
+app.use('/user/auth', userAuthRouter);
+app.use('/feedback',feedbackRouter);
 
 const start = async () => {
     try {
@@ -39,7 +39,7 @@ const start = async () => {
         await connectDB(mongoURI);
         app.listen(port, () => {
             console.log(`Server is listening to port ${port} happily`);
-            console.log(`GO Live: http://localhost:${port}/`)
+            console.log(`GO Live: http://localhost:${port}/`);
         });
     } catch (error) {
         console.error('Error starting the server:', error);
@@ -56,7 +56,7 @@ process.on('SIGINT', () => {
     try {
         disconnectDB();
     } catch (err) {
-        console.log("Error disconnecting mongoDB", err);
+        console.log('Error disconnecting mongoDB', err);
     }
 
     process.exit(0);
