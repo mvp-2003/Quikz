@@ -1,0 +1,27 @@
+Quiz Schema:
+    {
+        "title": "string",
+        "questions": [
+            {
+                "question": "string",
+                "options": {
+                    "1": "option1",
+                    "2": "option2",
+                    ...
+                },
+                "ansewerOption": "integer"
+            }
+        ],
+        "createdAt": "time",
+        "updatedAt": "time"
+    }
+
+Routes:
+    1. POST /api/quiz
+        create quiz route. will be authorized route(middleware will be added after implementing authentication)
+
+    2. UPDATE /api/quiz/:id 
+        update quiz title, questions and correct option(will be authorized too)
+
+    3. DELETE /api/quiz/:id
+        delete quiz(authorized)
