@@ -1,7 +1,6 @@
 const { StatusCodes } = require('http-status-codes');
 const dotenv = require('dotenv');
 const bcrypt = require('bcryptjs');
-
 const User = require('./../models/user');
 
 dotenv.config();
@@ -9,83 +8,65 @@ const secretKey = process.env.SECRET_KEY;
 
 const securePassword = async (password) => {
     try {
-        let hashedPass = await bcrypt.hash(password, 10);
-        return hashedPass;
+        return await bcrypt.hash(password, 10);
     } catch (err) {
-        console.log('Error Hashing password', err);
+        console.error('Error hashing password', err);
+        throw new Error('Password hashing failed');
     }
 };
 
-// registerUser
 const registerUser = async (req, res) => {
     try {
         const { name, email, password } = req.body;
 
-        // Check for null entries.
         if (!name || !email || !password) {
             return res.status(StatusCodes.BAD_REQUEST).send('All fields required');
         }
 
-        // check if email already exists
-        const oldUser = await User.findOne({ email });
-
-        if (oldUser) {
-            return res.status(StatusCodes.CONFLICT).send(`User with email ${oldUser} already exits.`);
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(StatusCodes.CONFLICT).send(`User with email ${email} already exists.`);
         }
 
-        // Create Hash Password to store in DB
-        const hashedPass = await securePassword(password);
-
-        // Create Entry Data
-        const newData = { name, email, password: hashedPass };
-
-        // Create User in DB
-        const user = await User.create({ ...newData });
-
-        // Generate AccessToken
+        const hashedPassword = await securePassword(password);
+        const user = await User.create({ name, email, password: hashedPassword });
         const accessToken = user.generateAccessToken(secretKey);
 
         return res.status(StatusCodes.CREATED).json({ user, accessToken });
-
     } catch (err) {
-        console.log('Error registering a new User', err);
-        process.exit(1);
+        console.error('Error registering a new user', err);
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Error registering user');
     }
 };
 
-// loginUser
 const loginUser = async (req, res) => {
     try {
-        const {email, password} = req.body;
+        const { email, password } = req.body;
 
         if (!email || !password) {
-            return res.status(StatusCodes.BAD_REQUEST).send('ALL Fields Required');
+            return res.status(StatusCodes.BAD_REQUEST).send('All fields required');
         }
 
-        const oldUser = await User.findOne({email});
-
-        if (!oldUser) {
-            res.status(StatusCodes.NO_CONTENT).send('Email Does not exist');
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(StatusCodes.NOT_FOUND).send('Email does not exist');
         }
 
-        const isPassCorrect = await bcrypt.compare(password, oldUser.password);
-
-        if (isPassCorrect) {
-
-            const accessToken = oldUser.generateAccessToken(secretKey);
-             
-            return res.status(StatusCodes.OK).json({oldUser, accessToken});
+        const isPasswordCorrect = await bcrypt.compare(password, user.password);
+        if (!isPasswordCorrect) {
+            return res.status(StatusCodes.UNAUTHORIZED).send('Incorrect password');
         }
 
+        const accessToken = user.generateAccessToken(secretKey);
+        return res.status(StatusCodes.OK).json({ user, accessToken });
     } catch (err) {
-        console.log('Error Logging in', err);
-        process.exit(1);
+        console.error('Error logging in', err);
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Error logging in');
     }
 };
 
-// emailVerification
 const emailVerification = async (req, res) => {
-    // TO DO: USE SMTP service.
+    // TODO: Implement email verification using SMTP service.
     res.status(StatusCodes.OK).send('OK');
 };
 
