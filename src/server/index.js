@@ -11,6 +11,7 @@ const userBadgeRouter = require("./routes/userBadgesRouter")
 const achievementRouter = require('./routes/achievementRouter')
 const userAchievementRouter = require("./routes/userAchievementRouter")
 const feedbackRouter=require('./routes/feedbackRouter');
+const quizRouter = require('./routes/quizRouter');
 
 // Configure Env Variables.
 dotenv.config();
@@ -33,6 +34,7 @@ app.use('/user/achievements', userAchievementRouter);
 app.use('/badges',badgeRouter);
 app.use('/achievements',achievementRouter);
 app.use('/feedback',feedbackRouter);
+app.use('/api/quiz', quizRouter);
 
 const start = async () => {
     try {
