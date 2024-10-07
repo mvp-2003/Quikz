@@ -35,6 +35,12 @@ const fetchBadges = async (req, res) => {
 
 const awardBadge = async (req, res) => {
   try {
+    const { email } = req.body;
+    if (email != admin)
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ msg: 'You are not the admin' });
+        
     const { userId, badgeId } = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(badgeId)) {

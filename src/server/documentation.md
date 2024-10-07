@@ -120,6 +120,87 @@ In this Pull Request, I defined the API routes required for the Quiz application
   - **Description:** Retrieve all attempts by a specific user.
   - **Authorization Required**
 
+### Badges Route
+
+#### List All Badges
+- **GET /badges**
+  - **Description:** Retrieve all badges.
+
+#### Details of a Specific Badge
+- **GET /badges/:badgeId**
+  - **Description:** Retrieve details of a specific badge.
+
+#### Create Badge [admin]
+- **POST /badges**
+  - **Description:** Create a badge.
+
+#### Delete Badge [admin]
+- **DELETE /badges/:badgeId**
+  - **Description:** Create a badge.
+
+### User Badges Route
+
+#### List All Badges
+- **GET /user/badges/:userId**
+  - **Description:** Retrieve all badges of a user.
+
+#### Post a badge to a user
+- **POST /user/badges/:userId/:badgeId**
+  - **Description:** Award user a Badge.
+
+#### Delete Badge [admin]
+- **DELETE /user/badges/:userId/:badgeId**
+  - **Description:** Delete a badge.
+
+### Achievements Route
+
+#### List All Achievements
+- **GET /achievements**
+  - **Description:** Retrieve all achievements.
+
+#### Details of a Specific Achievement
+- **GET /achievements/:achievementId**
+  - **Description:** Retrieve details of a specific achievement.
+
+#### Create Achievement [admin]
+- **POST /achievements**
+  - **Description:** Create an achievement.
+
+#### Delete Achievement [admin]
+- **DELETE /achievements/:achievementId**
+  - **Description:** Create an achievement.
+
+### User Achievements Route
+
+#### List All Achievements
+- **GET /user/achievements/:userId**
+  - **Description:** Retrieve all achievements of a user.
+
+#### Post an achievement to a user
+- **POST /user/achievements/:userId/:achievementId**
+  - **Description:** Award user an achievement.
+
+#### Delete achievement [admin]
+- **DELETE /user/achievements/:userId/:achievementId**
+  - **Description:** Delete an achievement.
+
+### Report Card Routes
+
+#### Add Report
+- **POST /api/reports/addReport**
+  - **Description:** Create a new report.
+  - **Authorization Required**
+
+#### Get All Attempts
+- **POST /api/reports/getAllAttempts**
+  - **Description:** Retrieve all attempts.
+  - **Authorization Required**
+
+#### Get All Attempts by User
+- **GET /api/reports/getAllAttemptsByUser**
+  - **Description:** Retrieve all attempts by a specific user.
+  - **Authorization Required**
+
 ## Testing
 ### Postman API Testing
 All API routes were tested using Postman to ensure they function as expected. Below are the details of the tests conducted:

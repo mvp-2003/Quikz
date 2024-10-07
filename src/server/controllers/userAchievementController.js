@@ -35,6 +35,12 @@ const fetchAchievements = async (req, res) => {
 
 const awardAchievement = async (req, res) => {
   try {
+    const { email } = req.body;
+    if (email != admin)
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ msg: 'You are not the admin' });
+
     const { userId, achievementId } = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(achievementId)) {
