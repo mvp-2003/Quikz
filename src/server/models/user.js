@@ -5,18 +5,42 @@ const userSchema = new mongoose.Schema(
     {
         name: {
             type: String,
-            default: null
+            default: null,
         },
         email: {
             type: String,
-            unique: true
+            unique: true,
+            required: true,
         },
         password: {
-            type: String
-        }
+            type: String,
+            required: true,
+        },
+        badges: [{
+            badgeId: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Badge',
+            },
+            achievedAt: {
+                type: Date,
+                default: Date.now,
+            },
+        }],
+        achievements: [{
+            achievementId: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Achievement',
+            },
+            achievedAt: {
+                type: Date,
+                default: Date.now,
+            },
+        }],
+    },
+    {
+        timestamps: true,
     }
 );
-
 userSchema.methods.generateAccessToken = function (secretKey) {
     try {
         const token = jwt.sign(
@@ -36,4 +60,7 @@ userSchema.methods.generateAccessToken = function (secretKey) {
     }
 };
 
-module.exports = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema);
+module.exports = {
+    User
+}

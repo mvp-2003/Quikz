@@ -6,6 +6,10 @@ const cors = require('cors');
 // Import Modules
 const {connectDB, disconnectDB} = require('./db/connect');
 const userAuthRouter = require('./routes/userAuthRouters');
+const badgeRouter = require('./routes/badgesRouter')
+const userBadgeRouter = require("./routes/userBadgesRouter")
+const achievementRouter = require('./routes/achievementRouter')
+const userAchievementRouter = require("./routes/userAchievementRouter")
 const feedbackRouter=require('./routes/feedbackRouter');
 
 // Configure Env Variables.
@@ -14,7 +18,6 @@ const port = process.env.PORT || 5500;
 const mongoURI = process.env.MONGO_URI;
 
 const app = express();
-
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
@@ -25,6 +28,10 @@ app.get('/', (req, res)=>{
 
 // Router
 app.use('/user/auth', userAuthRouter);
+app.use('/user/badges', userBadgeRouter);
+app.use('/user/achievements', userAchievementRouter);
+app.use('/badges',badgeRouter);
+app.use('/achievements',achievementRouter);
 app.use('/feedback',feedbackRouter);
 
 const start = async () => {

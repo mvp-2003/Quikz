@@ -30,7 +30,7 @@ const registerUser = async (req, res) => {
         const oldUser = await User.findOne({ email });
 
         if (oldUser) {
-            return res.status(StatusCodes.CONFLICT).send(`User with email ${oldUser} already exits.`);
+            return res.status(StatusCodes.CONFLICT).send(`User with email ${oldUser} already exists.`);
         }
 
         // Create Hash Password to store in DB
