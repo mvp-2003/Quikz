@@ -8,6 +8,7 @@ const {connectDB, disconnectDB} = require('./db/connect');
 const userAuthRouter = require('./routes/userAuthRouters');
 const feedbackRouter=require('./routes/feedbackRouter');
 const pollRouter=require('./routes/pollRouter');
+const quizRouter = require('./routes/quizRouter');
 
 // Configure Env Variables.
 dotenv.config();
@@ -28,6 +29,7 @@ app.get('/', (req, res)=>{
 app.use('/user/auth', userAuthRouter);
 app.use('/feedback',feedbackRouter);
 app.use('/polls', pollRouter);
+app.use('/api/quiz', quizRouter);
 
 const start = async () => {
     try {
