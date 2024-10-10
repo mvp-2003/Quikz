@@ -69,7 +69,7 @@ process.on('SIGINT', () => {
   try {
     disconnectDB();
   } catch (err) {
-    console.log('Error disconnecting mongoDB', err);
+    console.log("Error disconnecting mongoDB", err);
   }
 
   process.exit(0);
