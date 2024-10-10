@@ -200,6 +200,279 @@ In this Pull Request, I defined the API routes required for the Quiz application
 - **GET /api/reports/getAllAttemptsByUser**
   - **Description:** Retrieve all attempts by a specific user.
   - **Authorization Required**
+=======
+### Polls Routes
+
+#### Retrieve Polls
+- **Get /polls**
+  - **Description:** Retrieve all polls
+  - **Response:**
+    ```json
+    {
+    "success": true,
+    "polls": [
+        {
+            "_id": "67056a57ff6a9876d6a04452",
+            "title": "Updated Favorite Programming Language",
+            "description": "Vote for your updated favorite programming language.",
+            "questions": [
+                {
+                    "question": "Which programming language do you prefer now?",
+                    "options": [
+                        {
+                            "option": "JavaScript",
+                            "votes": 0,
+                            "_id": "67056a57ff6a9876d6a04454"
+                        },
+                        {
+                            "option": "Python",
+                            "votes": 0,
+                            "_id": "67056a57ff6a9876d6a04455"
+                        },
+                        {
+                            "option": "Java",
+                            "votes": 0,
+                            "_id": "67056a57ff6a9876d6a04456"
+                        },
+                        {
+                            "option": "C++",
+                            "votes": 0,
+                            "_id": "67056a57ff6a9876d6a04457"
+                        }
+                    ],
+                    "voters": [],
+                    "_id": "67056a57ff6a9876d6a04453"
+                },
+                {
+                    "question": "Which backend framework do you prefer now?",
+                    "options": [
+                        {
+                            "option": "Express",
+                            "votes": 0,
+                            "_id": "67056a57ff6a9876d6a04459"
+                        },
+                        {
+                            "option": "Django",
+                            "votes": 0,
+                            "_id": "67056a57ff6a9876d6a0445a"
+                        },
+                        {
+                            "option": "Spring",
+                            "votes": 0,
+                            "_id": "67056a57ff6a9876d6a0445b"
+                        },
+                        {
+                            "option": "Flask",
+                            "votes": 0,
+                            "_id": "67056a57ff6a9876d6a0445c"
+                        }
+                    ],
+                    "voters": [],
+                    "_id": "67056a57ff6a9876d6a04458"
+                }
+            ],
+            "created_at": "2024-10-08T17:22:31.555Z",
+            "updated_at": "2024-10-08T17:22:31.555Z",
+            "__v": 0
+          }
+        ]
+      }
+    ```
+### Create Poll
+- **POST /polls**
+  - **Description:** create a poll.
+  - **Authorization Required**
+  - **Request Body:**
+    ```json
+      {
+    "title": "Updated Favorite Programming Language",
+    "description": "Vote for your updated favorite programming language.",
+    "questions": [
+        {
+            "question": "Which programming language do you prefer now?",
+            "options": [
+                {
+                    "option": "JavaScript",
+                    "votes": 0
+                },
+                {
+                    "option": "Python",
+                    "votes": 0
+                },
+                {
+                    "option": "Java",
+                    "votes": 0
+                },
+                {
+                    "option": "C++",
+                    "votes": 0
+                }
+            ]
+        },
+        {
+            "question": "Which backend framework do you prefer now?",
+            "options": [
+                {
+                    "option": "Express",
+                    "votes": 0
+                },
+                {
+                    "option": "Django",
+                    "votes": 0
+                },
+                {
+                    "option": "Spring",
+                    "votes": 0
+                },
+                {
+                    "option": "Flask",
+                    "votes": 0
+                }
+            ]
+        }
+    ]
+}
+    ```
+
+
+
+
+#### Retrieve Poll by ID
+- **GET /polls/:id**
+  - **Description:** Retrieve a poll by its ID.
+  - **Response:**
+    ```json
+    {
+        "_id": "67056a57ff6a9876d6a04452",
+        "title": "Updated Favorite Programming Language",
+        "description": "Vote for your updated favorite programming language.",
+        "questions": [
+            {
+                "question": "Which programming language do you prefer now?",
+                "options": [
+                    { "option": "JavaScript", "votes": 0, "_id": "67056a57ff6a9876d6a04454" },
+                    { "option": "Python", "votes": 0, "_id": "67056a57ff6a9876d6a04455" },
+                    { "option": "Java", "votes": 0, "_id": "67056a57ff6a9876d6a04456" },
+                    { "option": "C++", "votes": 0, "_id": "67056a57ff6a9876d6a04457" }
+                ],
+                "voters": [],
+                "_id": "67056a57ff6a9876d6a04453"
+            },
+            {
+                "question": "Which backend framework do you prefer now?",
+                "options": [
+                    { "option": "Express", "votes": 0, "_id": "67056a57ff6a9876d6a04459" },
+                    { "option": "Django", "votes": 0, "_id": "67056a57ff6a9876d6a0445a" },
+                    { "option": "Spring", "votes": 0, "_id": "67056a57ff6a9876d6a0445b" },
+                    { "option": "Flask", "votes": 0, "_id": "67056a57ff6a9876d6a0445c" }
+                ],
+                "voters": [],
+                "_id": "67056a57ff6a9876d6a04458"
+            }
+        ],
+        "created_at": "2024-10-08T17:22:31.555Z",
+        "updated_at": "2024-10-08T17:22:31.555Z",
+        "__v": 0
+    }
+    ```
+
+#### Update Poll by ID
+- **PUT /polls/:id**
+  - **Description:** Update a poll by its ID.
+  - **Authorization Required**
+  - **Request Body:**
+    ```json
+    {
+        "title": "Updated Favorite Programming Language",
+        "description": "Vote for your updated favorite programming language.",
+        "questions": [
+            {
+                "question": "Which programming language do you prefer now?",
+                "options": [
+                    { "option": "JavaScript", "votes": 0 },
+                    { "option": "Python", "votes": 0 },
+                    { "option": "Java", "votes": 0 },
+                    { "option": "C++", "votes": 0 }
+                ]
+            },
+            {
+                "question": "Which backend framework do you prefer now?",
+                "options": [
+                    { "option": "Express", "votes": 0 },
+                    { "option": "Django", "votes": 0 },
+                    { "option": "Spring", "votes": 0 },
+                    { "option": "Flask", "votes": 0 }
+                ]
+            }
+        ]
+    }
+    ```
+  
+
+#### Delete Poll by ID
+- **DELETE /api/polls/:id**
+  - **Description:** Delete a poll by its ID.
+  - **Authorization Required**
+
+#### Cast Vote
+- **POST /polls/:id/votes**
+  - **Description:** Cast a vote for a poll.
+  - **Authorization Required**
+  - **Request Body:**
+    ```json
+    {
+        "userId": "60d0fe4f5311236168a109ca",
+        "answers": [
+            {
+                "questionId": "67056a57ff6a9876d6a04453",
+                "optionId": "67056a57ff6a9876d6a04454"
+            },
+            {
+                "questionId": "67056a57ff6a9876d6a04458",
+                "optionId": "67056a57ff6a9876d6a04459"
+            }
+        ]
+    }
+    ```
+
+#### Retrieve Live Poll Results
+- **GET /polls/:id/results**
+  - **Description:** Retrieve live results of a poll by its ID.
+  - **Response:**
+    ```json
+    {
+        "_id": "67056a57ff6a9876d6a04452",
+        "title": "Updated Favorite Programming Language",
+        "description": "Vote for your updated favorite programming language.",
+        "questions": [
+            {
+                "question": "Which programming language do you prefer now?",
+                "options": [
+                    { "option": "JavaScript", "votes": 10, "_id": "67056a57ff6a9876d6a04454" },
+                    { "option": "Python", "votes": 20, "_id": "67056a57ff6a9876d6a04455" },
+                    { "option": "Java", "votes": 5, "_id": "67056a57ff6a9876d6a04456" },
+                    { "option": "C++", "votes": 2, "_id": "67056a57ff6a9876d6a04457" }
+                ],
+                "voters": ["60d0fe4f5311236168a109ca", "60d0fe4f5311236168a109cb"],
+                "_id": "67056a57ff6a9876d6a04453"
+            },
+            {
+                "question": "Which backend framework do you prefer now?",
+                "options": [
+                    { "option": "Express", "votes": 15, "_id": "67056a57ff6a9876d6a04459" },
+                    { "option": "Django", "votes": 10, "_id": "67056a57ff6a9876d6a0445a" },
+                    { "option": "Spring", "votes": 8, "_id": "67056a57ff6a9876d6a0445b" },
+                    { "option": "Flask", "votes": 3, "_id": "67056a57ff6a9876d6a0445c" }
+                ],
+                "voters": ["60d0fe4f5311236168a109ca", "60d0fe4f5311236168a109cb"],
+                "_id": "67056a57ff6a9876d6a04458"
+            }
+        ],
+        "created_at": "2024-10-08T17:22:31.555Z",
+        "updated_at": "2024-10-08T17:22:31.555Z",
+        "__v": 0
+    }
+    ```
 
 ## Testing
 ### Postman API Testing
@@ -218,3 +491,7 @@ All API routes were tested using Postman to ensure they function as expected. Be
   - Test cases for generating and retrieving reports.
 
 
+---
+# Frontend Design Inspo
+## https://www.figma.com/design/s0eI8YDamF3Gqh3Bt5et99/asmbDev?node-id=116-4&t=n0JzcDKEmnMHk0kg-1
+### This url is the inspiration for Quikz's UI. Make sure to follow this as a base for the UI and make additional changes to improve the UX/UI. (use free icons libraries and animation libraries for making the UI & UX for user friendly).
