@@ -2,8 +2,7 @@ name: Lint Code
 
 on:
   pull_request:
-    branches:
-      - main  
+  push:
 
 jobs:
   lint:
@@ -24,11 +23,25 @@ jobs:
           npm install
 
       - name: Run ESLint
+        id: lint
         run: |
           cd src/server
-          npx eslint . || true  # Run ESLint and allow failure to capture errors
+          eslint_output=$(npx eslint . --max-warnings=0 || echo "Linting failed")
+          echo "$eslint_output"
+          if [[ "$eslint_output" == *"warning"* ]]; then
+            echo "linting issues found"
+            exit 1  # Fail the step if warnings are found
+          fi
 
-      - name: Check ESLint results
-        run: |
-          echo "If there are linting issues, please run the following command to fix them:"
-          echo "npm run lint:fix"
+      - name: Post PR comment if lint issues found
+        if: steps.lint.outcome == 'failure'  # Only runs if the lint step failed
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const pr_number = context.payload.pull_request.number;
+            github.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: pr_number,
+              body: `Linting issues were detected in this pull request. Please run \`npm run lint:fix\` to resolve the issues before merging.`
+            })

@@ -13,8 +13,8 @@ export default {
     },
     rules: {
         'no-console': 'off',
-        'semi': ['warn', 'always'], // Change 'error' to 'warn'
-        'quotes': ['warn', 'single'], // Change 'error' to 'warn'
+        'semi': ['error', 'always'], // Change 'error' to 'warn'
+        'quotes': ['error', 'single'], // Change 'error' to 'warn'
     },
   };
   
