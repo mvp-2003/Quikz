@@ -6,10 +6,10 @@ const cors = require('cors');
 // Import Modules
 const { connectDB, disconnectDB } = require('./db/connect');
 const userAuthRouter = require('./routes/userAuthRouters');
-const badgeRouter = require('./routes/badgesRouter')
-const userBadgeRouter = require("./routes/userBadgesRouter")
-const achievementRouter = require('./routes/achievementRouter')
-const userAchievementRouter = require("./routes/userAchievementRouter")
+const badgeRouter = require('./routes/badgesRouter');
+const userBadgeRouter = require('./routes/userBadgesRouter');
+const achievementRouter = require('./routes/achievementRouter');
+const userAchievementRouter = require('./routes/userAchievementRouter');
 const feedbackRouter = require('./routes/feedbackRouter');
 const pollRouter = require('./routes/pollRouter');
 const quizRouter = require('./routes/quizRouter');

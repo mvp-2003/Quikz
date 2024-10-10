@@ -1,6 +1,6 @@
 const { Badge } = require('../models/badge');
 const dotenv = require('dotenv');
-const StatusCodes = require("http-status-codes")
+const StatusCodes = require('http-status-codes');
 dotenv.config();
 const admin = process.env.admin;
 
@@ -41,10 +41,10 @@ const createBadges = async (req, res) => {
         });
 
     const badge = {name, description,criteria,count,icon};
-    await Badge.create({...badge})
+    await Badge.create({...badge});
     return res.json({
-      msg: "Create Success"
-    })
+      msg: 'Create Success'
+    });
 
   } catch (err) {
     console.log('Error Logging in', err);
@@ -54,9 +54,9 @@ const createBadges = async (req, res) => {
 
 const deleteBadges = async (req, res) => {
   try {
-    const badgeId  = req.params.badgeId
+    const badgeId  = req.params.badgeId;
     const { email } = req.body;
-    console.log(badgeId)
+    console.log(badgeId);
     if (email !== admin) {
       return res.status(400).json({
         msg: 'You are Not the admin',
