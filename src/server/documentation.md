@@ -495,3 +495,10 @@ All API routes were tested using Postman to ensure they function as expected. Be
 # Frontend Design Inspo
 ## https://www.figma.com/design/s0eI8YDamF3Gqh3Bt5et99/asmbDev?node-id=116-4&t=n0JzcDKEmnMHk0kg-1
 ### This url is the inspiration for Quikz's UI. Make sure to follow this as a base for the UI and make additional changes to improve the UX/UI. (use free icons libraries and animation libraries for making the UI & UX for user friendly).
+
+----
+----
+
+# Frontend Routes Documentation
+## Landing page('/')
+### Tailwind setup is done for dark mode, react router dom setup is also done, the routes are managed in main.jsx itself.
