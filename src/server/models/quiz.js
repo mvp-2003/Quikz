@@ -3,35 +3,36 @@ const schema = mongoose.Schema;
 const User = require('./user');
 
 const quizSchema = new mongoose.Schema({
-    title: {
+  title: {
+    type: String,
+    required: true,
+  },
+  questions: [
+    {
+      question: {
         type: String,
-        required: true
+        required: true,
+      },
+      options: [String],
+      correctOption: {
+        type: String,
+        required: true,
+      },
     },
-    questions: [
-        {
-            question: {
-                type: String,
-                required: true
-            },
-            options: [String],
-            correctOption: {
-                type: String,
-                required: true
-            }
-        }
-    ],
-    createdAt: {
-        type: Date,
-        default: Date.now()
-    },
-    updatedAt: {
-        type: Date,
-        default: Date.now()
-    },
-    author: {
-        type: schema.Types.ObjectId, 
-        ref: 'User'
-    }
+  ],
+  createdAt: {
+    type: Date,
+    default: Date.now(),
+  },
+  updatedAt: {
+    type: Date,
+    default: Date.now(),
+  },
+  author: {
+    type: schema.Types.ObjectId,
+    ref: 'User',
+  },
+  tags: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tag' }],
 });
 
 module.exports = mongoose.model('Quiz', quizSchema);
