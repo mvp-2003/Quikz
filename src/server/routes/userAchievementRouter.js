@@ -5,9 +5,10 @@ const {
   awardAchievement,
   deleteAchievement,
 } = require('../controllers/userAchievementController');
+const authenticate = require('../middlewares/Auth');
 
-router.get('/:userId/', fetchAchievements);
-router.post('/:userId/:achievementId', awardAchievement);
-router.delete('/:userId/:achievementId', deleteAchievement);
+router.get('/:userId/', authenticate, fetchAchievements);
+router.post('/:userId/:achievementId', authenticate, awardAchievement);
+router.delete('/:userId/:achievementId', authenticate, deleteAchievement);
 
 module.exports = router;
