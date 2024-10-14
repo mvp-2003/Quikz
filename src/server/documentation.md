@@ -200,7 +200,31 @@ In this Pull Request, I defined the API routes required for the Quiz application
 - **GET /api/reports/getAllAttemptsByUser**
   - **Description:** Retrieve all attempts by a specific user.
   - **Authorization Required**
-=======
+
+
+## Templates Routes
+
+### Get All templates
+- **GET /api/templates/**
+  - **Description:** Retrieve all templates.
+  - **Authorization Required**
+
+### Get All templates
+- **POST /api/templates/create**
+  - **Description:** Create templates.
+  - **Authorization Required**
+
+### Get All templates
+- **POST /api/templates/clone/:id**
+  - **Description:** Clone templates.
+  - **Authorization Required**
+
+### Get All templates
+- **POST /api/templates/delete/:id**
+  - **Description:** Delete templates.
+  - **Authorization Required**
+
+
 ### Polls Routes
 
 #### Retrieve Polls
