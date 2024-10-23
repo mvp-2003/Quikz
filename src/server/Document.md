@@ -41,9 +41,8 @@ To run the project locally, follow these steps:
 1. Clone the repository.
 2. Install dependencies:
    - `npm install`
-3. Create a `.env` file in the root directory and add the following variables:
-   - PORT=5500 
-   - MONGO_URI=mongodb://localhost:27017
+3. Create a `.env` file in the root directory, refer the `.env.sample` file:
+   - Change it accordingly for your convenience
 4. Ensure MongoDB is running locally, or provide a remote URI in the `.env` file.
 5. Start the development server:
    - `npm start`
