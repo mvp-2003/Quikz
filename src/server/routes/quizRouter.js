@@ -9,7 +9,7 @@ const {
   getQuizzes,
 } = require('../controllers/quizController');
 
-router.post('/', authenticateUser, createQuiz);
+router.post('/create', authenticateUser, createQuiz);
 router.put('/:id', authenticateUser, updateQuiz);
 router.delete('/:id', authenticateUser, deleteQuiz);
 router.get('/:id', getQuiz);
