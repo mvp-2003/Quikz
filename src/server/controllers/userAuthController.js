@@ -2,7 +2,7 @@ const { StatusCodes } = require('http-status-codes');
 const dotenv = require('dotenv');
 const bcrypt = require('bcryptjs');
 
-const User = require('./../models/user');
+const {User} = require('./../models/user');
 
 dotenv.config();
 const secretKey = process.env.SECRET_KEY;

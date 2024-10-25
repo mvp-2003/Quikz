@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const { StatusCodes } = require('http-status-codes');
 
 const authenticateUser = (req, res, next) => {
+    console.log(req.body);
     const token = req.header('Authorization')?.replace('Bearer ','');
     
     if (!token) {
