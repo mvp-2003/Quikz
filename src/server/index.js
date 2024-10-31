@@ -12,7 +12,7 @@ const achievementRouter = require('./routes/achievementRouter');
 const userAchievementRouter = require('./routes/userAchievementRouter');
 const feedbackRouter = require('./routes/feedbackRouter');
 const pollRouter = require('./routes/pollRouter');
-const templateRouter = require('./routes/templateRouter')
+const templateRouter = require('./routes/templateRouter');
 const quizRouter = require('./routes/quizRouter');
 const tagRouter = require('./routes/tagRouter');
 
@@ -34,9 +34,9 @@ app.get('/', (req, res) => {
 app.use('/user/auth', userAuthRouter);
 app.use('/user/badges', userBadgeRouter);
 app.use('/user/achievements', userAchievementRouter);
-app.use('/badges',badgeRouter);
-app.use('/achievements',achievementRouter);
-app.use('/feedback',feedbackRouter);
+app.use('/badges', badgeRouter);
+app.use('/achievements', achievementRouter);
+app.use('/feedback', feedbackRouter);
 app.use('/polls', pollRouter);
 app.use('/api/templates', templateRouter);
 app.use('/api/quiz', quizRouter);
