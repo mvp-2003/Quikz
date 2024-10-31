@@ -32,7 +32,6 @@ const fetchAchievements = async (req, res) => {
   }
 };
 
-
 const awardAchievement = async (req, res) => {
   try {
     const { email } = req.body;

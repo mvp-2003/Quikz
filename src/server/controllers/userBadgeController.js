@@ -16,22 +16,17 @@ const fetchBadges = async (req, res) => {
         .json({ msg: 'User ID not found' });
     }
 
-    const userBadges = await User.findById(userId).populate(
-      'badges.badgeId'
-    );
+    const userBadges = await User.findById(userId).populate('badges.badgeId');
     if (!userBadges) {
       return res.status(StatusCodes.NOT_FOUND).json({ msg: 'User not found' });
     }
 
-    return res
-      .status(StatusCodes.OK)
-      .json({ badges: userBadges.badges });
+    return res.status(StatusCodes.OK).json({ badges: userBadges.badges });
   } catch (err) {
     console.error('Error while fetching Badges: ', err);
     return res.status(500).json({ msg: 'Server error' });
   }
 };
-
 
 const awardBadge = async (req, res) => {
   try {
@@ -40,7 +35,7 @@ const awardBadge = async (req, res) => {
       return res
         .status(StatusCodes.BAD_REQUEST)
         .json({ msg: 'You are not the admin' });
-        
+
     const { userId, badgeId } = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(badgeId)) {

@@ -53,7 +53,7 @@ const createAchievements = async (req, res) => {
 
 const deleteAchievements = async (req, res) => {
   try {
-    const achievementId  = req.params.achievementId;
+    const achievementId = req.params.achievementId;
     const { email } = req.body;
 
     if (email !== admin) {

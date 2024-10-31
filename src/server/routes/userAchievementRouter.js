@@ -9,6 +9,7 @@ const authenticate = require('../middlewares/Auth');
 
 router.get('/:userId/', authenticate, fetchAchievements);
 router.post('/:userId/:achievementId', authenticate, awardAchievement);
+f;
 router.delete('/:userId/:achievementId', authenticate, deleteAchievement);
 
 module.exports = router;

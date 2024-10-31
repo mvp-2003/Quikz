@@ -1,21 +1,26 @@
 # Controllers Directory
 
 ## Overview:
+
 The `controllers` directory is responsible for handling the core business logic of the application. Each controller function processes incoming requests, interacts with models (database), and returns the appropriate response to the client.
 
 Controllers help maintain clean code by separating business logic from route definitions and database models. This structure also makes future feature additions easier and keeps the code more maintainable.
 
 ### Structure:
+
 - Each controller file corresponds to a feature or module in the application (e.g., `userController.js` for user authentication).
 - Functions in controller files typically correspond to specific routes (e.g., user registration, login, etc.).
 - Controllers import models from the `models/` directory to perform CRUD operations.
 
 ### Current Example (User Authentication):
+
 In the current implementation, `userController.js` contains functions to handle user registration and login:
+
 1. **registerUser**: Handles new user registration, including password hashing and token generation.
 2. **loginUser**: Verifies user credentials, checks hashed passwords, and returns an authentication token.
 
 #### Example Function:
+
 ```js
 const { StatusCodes } = require('http-status-codes');
 const User = require('../models/user');
@@ -24,22 +29,22 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const registerUser = async (req, res) => {
-    const { name, email, password } = req.body;
+  const { name, email, password } = req.body;
 
-    if (!name || !email || !password) {
-        return res.status(StatusCodes.BAD_REQUEST).send("All fields are required");
-    }
+  if (!name || !email || !password) {
+    return res.status(StatusCodes.BAD_REQUEST).send('All fields are required');
+  }
 
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-        return res.status(StatusCodes.CONFLICT).send(`User already exists`);
-    }
+  const existingUser = await User.findOne({ email });
+  if (existingUser) {
+    return res.status(StatusCodes.CONFLICT).send(`User already exists`);
+  }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const user = await User.create({ name, email, password: hashedPassword });
-    
-    const accessToken = user.generateAccessToken(process.env.SECRET_KEY);
-    return res.status(StatusCodes.CREATED).json({ user, accessToken });
+  const hashedPassword = await bcrypt.hash(password, 10);
+  const user = await User.create({ name, email, password: hashedPassword });
+
+  const accessToken = user.generateAccessToken(process.env.SECRET_KEY);
+  return res.status(StatusCodes.CREATED).json({ user, accessToken });
 };
 ```
 
@@ -68,19 +73,22 @@ const registerUser = async (req, res) => {
 4. **Export the controller functions** for use in the route handler.
 
 ### Example for Quiz:
+
 ```js
 const Quiz = require('../models/quiz');
 const { StatusCodes } = require('http-status-codes');
 
 const createQuiz = async (req, res) => {
-    const { title, questions } = req.body;
+  const { title, questions } = req.body;
 
-    if (!title || !questions) {
-        return res.status(StatusCodes.BAD_REQUEST).send("Title and questions are required");
-    }
+  if (!title || !questions) {
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .send('Title and questions are required');
+  }
 
-    const quiz = await Quiz.create({ title, questions });
-    return res.status(StatusCodes.CREATED).json({ quiz });
+  const quiz = await Quiz.create({ title, questions });
+  return res.status(StatusCodes.CREATED).json({ quiz });
 };
 
 module.exports = { createQuiz };
@@ -99,7 +107,6 @@ module.exports = { createQuiz };
 
 - **Use asynchronous operations**:  
   When interacting with the database, always use asynchronous operations (`async/await`) to ensure non-blocking behavior and avoid performance bottlenecks.
-
 
 ## Future Guidance:
 

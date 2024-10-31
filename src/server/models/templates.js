@@ -21,6 +21,12 @@ const quizTemplateSchema = new mongoose.Schema({
       },
     },
   ],
+  tags: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Tag',
+    },
+  ],
   duration: {
     type: Number,
     required: true,

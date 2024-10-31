@@ -4,18 +4,18 @@ const feedbackSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
-    ref: 'User' 
+    ref: 'User',
   },
   quizId: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
-    ref: 'Quiz' 
+    ref: 'Quiz',
   },
   rating: {
     type: Number,
     required: true,
     min: 1,
-    max: 5
+    max: 5,
   },
   comments: {
     type: String,
@@ -23,8 +23,8 @@ const feedbackSchema = new mongoose.Schema({
   },
   createdAt: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
 });
 
 const Feedback = mongoose.model('Feedback', feedbackSchema);

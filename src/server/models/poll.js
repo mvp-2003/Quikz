@@ -13,7 +13,7 @@ const questionSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
     },
-  ]
+  ],
 });
 
 const pollSchema = new mongoose.Schema({

@@ -1,16 +1,20 @@
 # Database Directory
 
 ## Overview:
+
 The `db` directory contains all database-related configurations and connection logic for the application. This directory is responsible for establishing and managing the connection to the MongoDB database using Mongoose or another ORM. It may also include database seeding and connection utility functions.
 
 ### Structure:
+
 - The primary file in this directory is typically `db.js`, which handles the connection setup and configuration.
 - Additional scripts may be included for seeding the database with initial data or handling migrations if necessary.
 
 ### Current Example (db.js):
+
 In the current implementation, `db.js` is responsible for connecting to the MongoDB database using the URI specified in the environment variables.
 
 #### Example of db.js:
+
 ```js
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
@@ -19,16 +23,16 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const connectDB = async () => {
-    try {
-        await mongoose.connect(process.env.MONGO_URI, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
-        console.log("MongoDB connected successfully.");
-    } catch (error) {
-        console.error("MongoDB connection failed:", error);
-        process.exit(1);
-    }
+  try {
+    await mongoose.connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log('MongoDB connected successfully.');
+  } catch (error) {
+    console.error('MongoDB connection failed:', error);
+    process.exit(1);
+  }
 };
 
 module.exports = connectDB;
@@ -57,6 +61,7 @@ module.exports = connectDB;
    This allows you to run the seeding process whenever necessary.
 
 ### Example for Seeding Data:
+
 ```js
 const mongoose = require('mongoose');
 const User = require('../models/user');
@@ -65,21 +70,21 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const seedDB = async () => {
-    await mongoose.connect(process.env.MONGO_URI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    });
+  await mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
 
-    await User.deleteMany(); // Clear existing users
+  await User.deleteMany(); // Clear existing users
 
-    // Create new users
-    await User.create([
-        { name: 'Alice', email: 'alice@example.com', password: 'password123' },
-        { name: 'Bob', email: 'bob@example.com', password: 'password456' },
-    ]);
+  // Create new users
+  await User.create([
+    { name: 'Alice', email: 'alice@example.com', password: 'password123' },
+    { name: 'Bob', email: 'bob@example.com', password: 'password456' },
+  ]);
 
-    console.log("Database seeded!");
-    mongoose.connection.close();
+  console.log('Database seeded!');
+  mongoose.connection.close();
 };
 
 seedDB();
@@ -95,7 +100,6 @@ seedDB();
 
 - **Document scripts and utilities**:  
   Ensure that any scripts or utilities added to the `db` directory are well-documented. This will aid future developers in understanding the purpose and functionality of each script.
-
 
 ## Future Guidance:
 

@@ -26,7 +26,6 @@ const badgeSchema = new mongoose.Schema({
   },
 });
 
-
 const Badge = mongoose.model('Badge', badgeSchema);
 
 module.exports = { Badge };

@@ -1,17 +1,19 @@
 const express = require('express');
-const router=express.Router();
+const router = express.Router();
 
-const authenticateUser=require('../middlewares/Auth.js');
+const authenticateUser = require('../middlewares/Auth.js');
 
-const { submitFeedback, 
+const {
+  submitFeedback,
   retrieveFeedbackBasedOnQuizId,
-  retrieveFeedbackBasedOnUserId 
+  retrieveFeedbackBasedOnUserId,
 } = require('../controllers/feedbackController.js');
 
-router.route('/quiz/:quizId')
+router
+  .route('/quiz/:quizId')
   .get(retrieveFeedbackBasedOnQuizId)
-  .post(authenticateUser,submitFeedback);
+  .post(authenticateUser, submitFeedback);
 
-router.route('/user').get(authenticateUser,retrieveFeedbackBasedOnUserId);
+router.route('/user').get(authenticateUser, retrieveFeedbackBasedOnUserId);
 
 module.exports = router;
