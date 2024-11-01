@@ -48,7 +48,7 @@ const updateQuiz = async (req, res) => {
     }
 
     if (quiz.author != userId) {
-      res.status(StatusCodes.FORBIDDEN).send('You can\'t update this quiz!');
+      res.status(StatusCodes.FORBIDDEN).send('You cannot update this quiz!');
     }
 
     const { title, questions, tags } = req.body;
@@ -98,7 +98,7 @@ const deleteQuiz = async (req, res) => {
     }
 
     if (quiz.author != userId) {
-      res.status(StatusCodes.FORBIDDEN).send('You can\'t update this quiz!');
+      res.status(StatusCodes.FORBIDDEN).send('You cannot update this quiz!');
     }
 
     const deleteQuiz = await Quiz.findByIdAndDelete(quizId);

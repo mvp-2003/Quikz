@@ -1,40 +1,44 @@
 # Models Directory
 
 ## Overview:
+
 The `models` directory contains the data models for the application, typically using Mongoose for MongoDB interactions. Models define the structure of the data, including the fields, types, validation rules, and any associated methods. This directory acts as an interface between the application and the database.
 
 ### Structure:
+
 - Each model file corresponds to a specific entity or resource in the application (e.g., `User`, `Quiz`, etc.).
 - Models define the schema for the data, which outlines the fields and their types, as well as any validation rules.
 - This directory also includes any static methods or instance methods that are relevant to the model.
 
 ### Current Example (User Model):
-In the current implementation, `user.js` defines the schema and model for user data, including fields like `name`, `email`, and `password`. 
+
+In the current implementation, `user.js` defines the schema and model for user data, including fields like `name`, `email`, and `password`.
 
 #### Example of User Model:
+
 ```js
 const mongoose = require('mongoose');
 
 // User Schema Definition
 const userSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true,
-    },
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-    },
-    password: {
-        type: String,
-        required: true,
-    }
+  name: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
 });
 
 // Instance method to generate access token
 userSchema.methods.generateAccessToken = function (secretKey) {
-    return jwt.sign({ id: this._id }, secretKey, { expiresIn: '1h' });
+  return jwt.sign({ id: this._id }, secretKey, { expiresIn: '1h' });
 };
 
 // Exporting User model
@@ -62,36 +66,42 @@ module.exports = User;
 1. **Create a `quiz.js`** file in the `models/` directory.
 
 2. **Define the quiz schema**:
+
    - Include fields such as `title`, `questions`, and any necessary validation rules.
 
 3. **Export the model** for use in the relevant controllers.
 
 ### Example for Quiz Model:
+
 ```js
 const mongoose = require('mongoose');
 
 // Quiz Schema Definition
 const quizSchema = new mongoose.Schema({
-    title: {
+  title: {
+    type: String,
+    required: true,
+  },
+  questions: [
+    {
+      questionText: {
         type: String,
         required: true,
-    },
-    questions: [{
-        questionText: {
+      },
+      options: [
+        {
+          optionText: {
             type: String,
             required: true,
+          },
+          isCorrect: {
+            type: Boolean,
+            default: false,
+          },
         },
-        options: [{
-            optionText: {
-                type: String,
-                required: true,
-            },
-            isCorrect: {
-                type: Boolean,
-                default: false,
-            }
-        }]
-    }]
+      ],
+    },
+  ],
 });
 
 // Exporting Quiz model
@@ -109,7 +119,6 @@ module.exports = Quiz;
 
 - **Encapsulate related functionality**:  
   Include instance or static methods in models when it makes sense to encapsulate related functionality within the model itself. This promotes better organization and reuse of code.
-
 
 ## Future Guidance:
 

@@ -32,20 +32,19 @@ const createBadges = async (req, res) => {
       return res.status(400).json({
         msg: 'You are Not the admin',
       });
-    
-    const {name,description,criteria,count,icon} = req.body;
 
-    if(!name || !criteria || !count)    
-        return res.status(400).json({
-        msg: 'Invalid Body'
-        });
+    const { name, description, criteria, count, icon } = req.body;
 
-    const badge = {name, description,criteria,count,icon};
-    await Badge.create({...badge});
+    if (!name || !criteria || !count)
+      return res.status(400).json({
+        msg: 'Invalid Body',
+      });
+
+    const badge = { name, description, criteria, count, icon };
+    await Badge.create({ ...badge });
     return res.json({
-      msg: 'Create Success'
+      msg: 'Create Success',
     });
-
   } catch (err) {
     console.log('Error Logging in', err);
     process.exit(1);
@@ -54,7 +53,7 @@ const createBadges = async (req, res) => {
 
 const deleteBadges = async (req, res) => {
   try {
-    const badgeId  = req.params.badgeId;
+    const badgeId = req.params.badgeId;
     const { email } = req.body;
     console.log(badgeId);
     if (email !== admin) {
@@ -62,7 +61,7 @@ const deleteBadges = async (req, res) => {
         msg: 'You are Not the admin',
       });
     }
-    
+
     if (!badgeId) {
       return res.status(400).json({
         msg: 'Invalid Body: Badge ID is required',
@@ -80,7 +79,6 @@ const deleteBadges = async (req, res) => {
     return res.json({
       msg: 'Badge deleted successfully',
     });
-
   } catch (err) {
     console.log('Error deleting badge', err);
     return res.status(500).json({
@@ -88,7 +86,5 @@ const deleteBadges = async (req, res) => {
     });
   }
 };
-
-
 
 module.exports = { fetchBadges, fetchBadge, createBadges, deleteBadges };

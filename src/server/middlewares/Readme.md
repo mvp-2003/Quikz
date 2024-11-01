@@ -1,34 +1,40 @@
 # Middleware Directory
 
 ## Overview:
+
 The `middleware` directory contains all middleware functions used in the application. Middleware functions are functions that have access to the request, response, and the next middleware function in the application’s request-response cycle. They are essential for handling requests, performing validations, authentication, error handling, and more.
 
 ### Structure:
+
 - Each middleware function should be organized into separate files based on its functionality (e.g., `authMiddleware.js` for authentication logic).
 - This modular structure enhances maintainability and allows for easier testing and debugging.
 
 ### Current Example (authMiddleware.js):
+
 In the current implementation, `authMiddleware.js` is responsible for verifying user authentication tokens.
 
 #### Example of authMiddleware.js:
+
 ```js
 const jwt = require('jsonwebtoken');
 const { StatusCodes } = require('http-status-codes');
 
 const authenticateUser = (req, res, next) => {
-    const token = req.headers['authorization'];
+  const token = req.headers['authorization'];
 
-    if (!token) {
-        return res.status(StatusCodes.UNAUTHORIZED).send("Access denied. No token provided.");
+  if (!token) {
+    return res
+      .status(StatusCodes.UNAUTHORIZED)
+      .send('Access denied. No token provided.');
+  }
+
+  jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
+    if (err) {
+      return res.status(StatusCodes.FORBIDDEN).send('Invalid token.');
     }
-
-    jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
-        if (err) {
-            return res.status(StatusCodes.FORBIDDEN).send("Invalid token.");
-        }
-        req.user = decoded;
-        next();
-    });
+    req.user = decoded;
+    next();
+  });
 };
 
 module.exports = authenticateUser;
@@ -57,10 +63,13 @@ module.exports = authenticateUser;
    This enables you to attach the logging middleware to your routes easily.
 
 #### Example for Logging Middleware:
+
 ```js
 const loggingMiddleware = (req, res, next) => {
-    console.log(`${req.method} request for '${req.url}' at ${new Date().toISOString()}`);
-    next(); // Call the next middleware in the stack
+  console.log(
+    `${req.method} request for '${req.url}' at ${new Date().toISOString()}`
+  );
+  next(); // Call the next middleware in the stack
 };
 
 module.exports = loggingMiddleware;
@@ -76,7 +85,6 @@ module.exports = loggingMiddleware;
 
 - **Documentation**:  
   Document the purpose and usage of each middleware function clearly. This will help other developers understand the intent behind the middleware and how to use it effectively.
-
 
 ## Future Guidance:
 
