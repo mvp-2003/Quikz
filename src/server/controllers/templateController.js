@@ -179,5 +179,6 @@ module.exports = {
   fetchTemplates,
   createTemplate,
   cloneTemplate,
+  updateTemplate,
   deleteTemplate,
 };

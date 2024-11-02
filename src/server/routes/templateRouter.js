@@ -6,6 +6,7 @@ const {
   fetchTemplates,
   createTemplate,
   cloneTemplate,
+  updateTemplate,
   deleteTemplate,
 } = require('./../controllers/templateController');
 
