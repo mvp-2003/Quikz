@@ -73,7 +73,7 @@ const loginUser = async (req, res) => {
 
     if (isPassCorrect) {
       const accessToken = oldUser.generateAccessToken(secretKey);
-
+      res.cookie('Authorization', `Bearer ${accessToken}`);
       return res.status(StatusCodes.OK).json({ oldUser, accessToken });
     }
   } catch (err) {

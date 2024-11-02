@@ -23,11 +23,9 @@ const submitFeedback = async (req, res) => {
 
     //If the feedback entry is not created.
     if (!feedback)
-      return res
-        .status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({
-          message: 'Internal server error while creating new feedback entry',
-        });
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+        message: 'Internal server error while creating new feedback entry',
+      });
 
     return res.status(StatusCodes.CREATED).json({
       success: true,

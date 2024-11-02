@@ -2,6 +2,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 
 // Import Modules
 const { connectDB, disconnectDB } = require('./db/connect');
@@ -24,6 +25,7 @@ const mongoURI = process.env.MONGO_URI;
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => {
